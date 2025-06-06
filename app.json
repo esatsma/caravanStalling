@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "spellCardsv2",
-    "slug": "spellCardsv2",
+    "name": "caravanStalling",
+    "slug": "caravanStalling",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "spellcardsv2",
+    "scheme": "caravanstalling",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
