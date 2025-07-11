@@ -2,19 +2,11 @@ import {Button, ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
 import {Formik} from "formik";
 import PocketBase from "pocketbase";
+import {useAuthStore} from "@/stores/authStore";
 
-type formValues = { email: string, password: string, passwordConfirm: string }
+export type accountCreationFormValues = { email: string, password: string, passwordConfirm: string }
 export default function MijnStalling() {
-    const submitCreateAccount = async(values: formValues) => {
-        const pb = new PocketBase('http://127.0.0.1:8090');
-
-        try {
-            const result = await pb.collection('users').create({email: values.email, password: values.password, passwordConfirm: values.passwordConfirm})
-            console.log(result)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const {createAccount} = useAuthStore()
 
     return (
         <ScrollView style={{flex: 1}}
@@ -22,7 +14,7 @@ export default function MijnStalling() {
             <View style={styles.loginContainerStyle}>
                 <Formik
                     initialValues={{ email: '', password: '', passwordConfirm: '' }}
-                    onSubmit={values => submitCreateAccount(values)}>
+                    onSubmit={values => createAccount(values)}>
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
                         <View style={styles.inputContainer}>
                             <TextInput

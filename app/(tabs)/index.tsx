@@ -6,8 +6,10 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import {Link} from "expo-router";
+import {useAuthStore} from "@/stores/authStore";
 
 export default function HomeScreen() {
+  const {isAuthenticated, currentUser} = useAuthStore()
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -18,6 +20,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
+        {isAuthenticated && <ThemedText>Authenticated {isAuthenticated} </ThemedText>}
         <ThemedText type="title">Atsma Caravanstalling</ThemedText>
         <HelloWave />
       </ThemedView>

@@ -1,38 +1,14 @@
-import {Button, StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import {Formik} from "formik";
-import PocketBase from 'pocketbase'
-import {Link} from "expo-router";
 
-type formValues = { email: string, password: string }
+import {useAuthStore} from "@/stores/authStore";
+import LoginForm from "@/components/LoginForm";
+import {ThemedText} from "@/components/ThemedText";
+
 export default function MijnStalling() {
-
-
-    const submitLogin = (values: formValues) => {
-        console.log('loggin in')
-    }
-
-    const validateEmail = () => {
-
-    }
-
-    const validatePassword = () => {
-
-    }
-
-    const pb = new PocketBase('http://127.0.0.1:8090');
-
-    const checkUserData = async() => {
-        // authenticate as auth collection record
-        const userData = await pb.collection('users').authWithPassword('lisetteatsma@gmail.com', 'difFov-kefcuc-ruvfi3');
-
-        console.log(userData)
-
-    }
-
-    checkUserData()
+    const { isAuthenticated } = useAuthStore()
 
     return (
         <ParallaxScrollView
@@ -45,36 +21,8 @@ export default function MijnStalling() {
                     style={styles.headerImage}
                 />
             }>
-<View style={styles.loginContainerStyle}>
-                <Formik
-                    initialValues={{email: '', password: ''}}
-                    onSubmit={values => submitLogin(values)}>
-                    {({handleChange, handleBlur, handleSubmit, values}) => (
-                        <View style={styles.inputContainer}>
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder={'E-mailadres'}
-                                onChangeText={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                                autoComplete={'email'}
-                            />
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder={'Wachtwoord'}
-                                onChangeText={handleChange('password')}
-                                onBlur={handleBlur('password')}
-                                value={values.password}
-                                autoComplete={'current-password'}
-                                secureTextEntry
-                            />
-                            <Button onPress={() => handleSubmit} title="Inloggen"/>
-                            <Text>Heb je nog geen account? </Text>
-                            <Link href={"/createAccount"}>Account aanmaken</Link>
-                        </View>
-                    )}
-                </Formik>
-            </View>
+            {isAuthenticated}
+            {!isAuthenticated ? <LoginForm /> : <ThemedText>Hello user!</ThemedText>}
         </ParallaxScrollView>
     );
 }

@@ -23,9 +23,11 @@ export default function TabTwoScreen() {
       </ThemedView>
         <ThemedText>
             Atsma Caravan Stalling bevind zich op:
-        </ThemedText>        <ThemedText>
+        </ThemedText>
+        <ThemedText>
             Wrakkenpad 14-2
-        </ThemedText>        <ThemedText>
+        </ThemedText>
+        <ThemedText>
             8312 PX Creil
         </ThemedText>
 
