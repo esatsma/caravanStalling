@@ -1,12 +1,11 @@
 import { create } from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
-import { User } from '@/types/models'
 import PocketBase from "pocketbase";
 import {accountCreationFormValues} from "@/app/createAccount";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthState {
-    currentUser?: User
+    currentUser?: unknown
     isAuthenticated: boolean
 }
 
@@ -33,12 +32,12 @@ export const useAuthStore = create<AuthStore>()(
                 try {
                     const user = await pb.collection('users').authWithPassword(email, password)
 
+                    if(pb.authStore.isValid)
                     set((state) => ({
-                        currentUser: user,
+                        currentUser: pb.authStore.record,
                         isAuthenticated: true
                     }))
                 } catch (error) {
-                    console.error('Authentication failed:', error)
                     return error
                 }
             },
@@ -52,8 +51,6 @@ export const useAuthStore = create<AuthStore>()(
             },
 
             createAccount: async(values: accountCreationFormValues) => {
-                    const pb = new PocketBase('http://127.0.0.1:8090');
-
                     try {
                         const result = await pb.collection('users').create({email: values.email, password: values.password, passwordConfirm: values.passwordConfirm})
                         console.log(result)

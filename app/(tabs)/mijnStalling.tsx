@@ -5,7 +5,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 
 import {useAuthStore} from "@/stores/authStore";
 import LoginForm from "@/components/LoginForm";
-import {ThemedText} from "@/components/ThemedText";
+import Profile from "@/components/Profile";
 
 export default function MijnStalling() {
     const { isAuthenticated } = useAuthStore()
@@ -21,8 +21,7 @@ export default function MijnStalling() {
                     style={styles.headerImage}
                 />
             }>
-            {isAuthenticated}
-            {!isAuthenticated ? <LoginForm /> : <ThemedText>Hello user!</ThemedText>}
+            {!isAuthenticated ? <LoginForm /> : <Profile />}
         </ParallaxScrollView>
     );
 }

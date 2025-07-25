@@ -20,7 +20,6 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        {isAuthenticated && <ThemedText>Authenticated {isAuthenticated} </ThemedText>}
         <ThemedText type="title">Atsma Caravanstalling</ThemedText>
         <HelloWave />
       </ThemedView>

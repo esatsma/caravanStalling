@@ -1,7 +1,6 @@
 import {Button, ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
 import {Formik} from "formik";
-import PocketBase from "pocketbase";
 import {useAuthStore} from "@/stores/authStore";
 
 export type accountCreationFormValues = { email: string, password: string, passwordConfirm: string }
