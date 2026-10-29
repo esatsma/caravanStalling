@@ -3,17 +3,19 @@ import {Button, StyleSheet, Switch, View} from "react-native";
 import {useAuthStore} from "@/stores/authStore";
 import React from "react";
 import {ThemedText} from "@/components/ThemedText";
+import getVehicleData from "@/service/api/getVehicleData";
 
 const Profile = () => {
-    const { logout } = useAuthStore()
-    'get vehicles from database and render switches. when switchvalue changes set user_has_vehicles in database'
+    const { logout, currentUser } = useAuthStore()
+
+    const fetchVehicleOpenings = async() => {return await getVehicleData('5ee0jc8028wmj81')}
+
+    console.log(fetchVehicleOpenings())
+
 
     return <ThemedView>
         <ThemedText>Wat voor wagens stallen jullie?</ThemedText>
-        <View style={styles.switch}><Switch onValueChange={setVehicle()} /><ThemedText>Campers</ThemedText></View>
-        <View style={styles.switch}><Switch /><ThemedText>Caravans</ThemedText></View>
-        <View style={styles.switch}><Switch /><ThemedText>Vouwwagens</ThemedText></View>
-        <View style={styles.switch}><Switch /><ThemedText>Kano's/Boten</ThemedText></View>
+        {}
 
         <Button onPress={() => logout()} title={"Uitloggen"} />
     </ThemedView>

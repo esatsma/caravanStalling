@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
-import PocketBase from "pocketbase";
 import {accountCreationFormValues} from "@/app/createAccount";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import pb from "@/service/pocketBase";
 
 interface AuthState {
     currentUser?: unknown
@@ -16,8 +16,6 @@ interface AuthStore extends AuthState {
     logout: VoidFunction
     createAccount: ((values: accountCreationFormValues) => Promise<unknown>)
 }
-
-const pb = new PocketBase('http://127.0.0.1:8090');
 
 export const useAuthStore = create<AuthStore>()(
     persist(
